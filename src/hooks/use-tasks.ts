@@ -44,7 +44,7 @@ export function useTasks() {
       toast.error("There was a problem saving your tasks.");
     }
   }, []);
-  const createTask = async (title: string): Promise<Task> => {
+  const createTask = async (title: string, tags: string[] = []): Promise<Task> => {
     if (!title.trim()) {
       throw new Error("Task title cannot be empty.");
     }
@@ -53,6 +53,7 @@ export function useTasks() {
       title: title.trim(),
       completed: false,
       createdAt: Date.now(),
+      tags: tags,
     };
     const newTasks = [newTask, ...tasks];
     saveTasks(newTasks);
@@ -89,7 +90,7 @@ export function useTasks() {
       }
       return task;
     });
-     if (!updatedTask) {
+    if (!updatedTask) {
       throw new Error("Task not found.");
     }
     saveTasks(newTasks);
@@ -97,6 +98,21 @@ export function useTasks() {
   };
   const setDue = async (id: string, dueDate?: number): Promise<Task> => {
     return updateTask(id, { dueDate });
+  };
+  const addTag = async (id: string, tag: string): Promise<Task> => {
+    const task = tasks.find(t => t.id === id);
+    if (!task) throw new Error("Task not found.");
+    const newTags = [...(task.tags || [])];
+    if (!newTags.includes(tag.trim()) && tag.trim()) {
+      newTags.push(tag.trim());
+    }
+    return updateTask(id, { tags: newTags });
+  };
+  const removeTag = async (id: string, tagToRemove: string): Promise<Task> => {
+    const task = tasks.find(t => t.id === id);
+    if (!task) throw new Error("Task not found.");
+    const newTags = (task.tags || []).filter(tag => tag !== tagToRemove);
+    return updateTask(id, { tags: newTags });
   };
   const exportJson = () => {
     try {
@@ -122,7 +138,6 @@ export function useTasks() {
       try {
         const json = event.target?.result as string;
         const importedTasks = JSON.parse(json) as Task[];
-        // Basic validation
         if (Array.isArray(importedTasks) && importedTasks.every(t => t.id && t.title)) {
           saveTasks(importedTasks);
           toast.success("Tasks imported successfully!");
@@ -147,6 +162,8 @@ export function useTasks() {
     reorderTasks,
     toggleComplete,
     setDue,
+    addTag,
+    removeTag,
     exportJson,
     importJson,
     isLoading,

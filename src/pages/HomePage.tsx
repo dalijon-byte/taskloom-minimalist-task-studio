@@ -4,7 +4,7 @@ import { Toaster } from '@/components/ui/sonner';
 export function HomePage() {
   return (
     <>
-      <ThemeToggle className="fixed top-4 right-4" />
+      <ThemeToggle className="fixed top-4 right-4 z-50" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-8 md:py-10 lg:py-12 flex flex-col items-center min-h-screen">
           <header className="w-full max-w-3xl text-center mb-8 md:mb-12 animate-fade-in">
@@ -20,11 +20,11 @@ export function HomePage() {
             <TaskListContainer />
           </main>
           <footer className="w-full text-center py-8 mt-16 text-muted-foreground text-sm">
-            <p>Built with ��️ at Cloudflare</p>
+            <p>Built with ❤️ at Cloudflare</p>
           </footer>
         </div>
       </div>
-      <Toaster />
+      <Toaster richColors closeButton />
     </>
   );
 }
