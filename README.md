@@ -26,7 +26,7 @@ Taskloom is a visually exquisite, minimalist task/list manager built with modern
 
 ## Quick Start
 
-[cloudflarebutton]
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/dalijon-byte/taskloom-minimalist-task-studio)
 
 Get started instantly by deploying to Cloudflare Workers or running locally.
 
@@ -125,7 +125,7 @@ The app will be live at `https://<project-name>.<subdomain>.workers.dev`. Config
 
 For one-click deployment:
 
-[cloudflarebutton]
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/dalijon-byte/taskloom-minimalist-task-studio)
 
 ### Environment Variables
 
